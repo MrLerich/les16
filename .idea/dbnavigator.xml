@@ -33,7 +33,10 @@
 
 select * from "order"
 
-select * from offer]]></console>
+select * from offer
+
+select * from "order"
+where "id" = 222222]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
