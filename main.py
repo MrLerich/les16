@@ -96,7 +96,7 @@ def get_user_by_id(user_id):
         update_universal(User, user_id, request.json)
         #универсальным методом обновления выбираем модель по PK где обновляем и значения обновления
         return app.response_class(
-            response=json.dumps(["OK"], indent=4, ensure_ascii=False),
+            response=json.dumps(["Данные изменены успешно!"], indent=4, ensure_ascii=False),
             status=20,
             mimetype='application/json'
         )
@@ -104,7 +104,7 @@ def get_user_by_id(user_id):
         delete_universal(User, user_id)
         #универсальным удалением выбираем модельи что удаляем по PK
         return app.response_class(
-            response=json.dumps(["OK"], indent=4, ensure_ascii=False),
+            response=json.dumps(["Удалено успешно!"], indent=4, ensure_ascii=False),
             status=200,
             mimetype="application/json"
         )
@@ -121,14 +121,14 @@ def get_order_by_id(user_id):
     elif request.method == "PUT":
         update_universal(Order, user_id, request.json)
         return app.response_class(
-            response=json.dumps(["OK"], indent=4, ensure_ascii=False),
+            response=json.dumps(["Данные изменены успешно!"], indent=4, ensure_ascii=False),
             status=20,
             mimetype='application/json'
         )
     elif request.method == 'DELETE':
         delete_universal(Order, user_id)
         return app.response_class(
-            response=json.dumps(["OK"], indent=4, ensure_ascii=False),
+            response=json.dumps(["Удалено успешно!"], indent=4, ensure_ascii=False),
             status=200,
             mimetype="application/json"
         )
@@ -145,14 +145,14 @@ def get_offer_by_id(user_id):
     elif request.method == "PUT":
         update_universal(Offer, user_id, request.json)
         return app.response_class(
-            response=json.dumps(["OK"], indent=4, ensure_ascii=False),
+            response=json.dumps(["Данные изменены успешно!"], indent=4, ensure_ascii=False),
             status=20,
             mimetype='application/json'
         )
     elif request.method == 'DELETE':
         delete_universal(Offer, user_id)
         return app.response_class(
-            response=json.dumps(["OK"], indent=4, ensure_ascii=False),
+            response=json.dumps(["Удалено успешно!"], indent=4, ensure_ascii=False),
             status=200,
             mimetype="application/json"
         )
