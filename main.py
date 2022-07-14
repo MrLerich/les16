@@ -92,6 +92,8 @@ def get_user_by_id(user_id):
             status=200,
             mimetype="application/json"
         )
+    elif request.method == "PUT":
+
 
 
 if __name__ == '__main__':
