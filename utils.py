@@ -3,63 +3,65 @@ from config import db
 import json
 
 
-def insert_data_user(input_data: list):
-    """Вставляет данные в User построчно"""
-    for row in input_data:
-        db.session.add(
-            User(
-                id=row.get("id"),
-                first_name=row.get("first_name"),
-                last_name=row.get("last_name"),
-                age=row.get("age"),
-                email=row.get("email"),
-                role=row.get("role"),
-                phone=row.get("phone")
-            )
-        )
+#
+# def insert_data_user(input_data: list):
+#     """Вставляет данные в User построчно"""
+#     for row in input_data:
+#         db.session.add(
+#             User(
+#                 id=row.get("id"),
+#                 first_name=row.get("first_name"),
+#                 last_name=row.get("last_name"),
+#                 age=row.get("age"),
+#                 email=row.get("email"),
+#                 role=row.get("role"),
+#                 phone=row.get("phone")
+#             )
+#         )
+#
+#     db.session.commit()
+#
+#
+# def insert_data_order(input_data: list):
+#     """Вставляет данные в Order построчно"""
+#     for row in input_data:
+#         db.session.add(
+#             Order(
+#                 id=row.get("id"),
+#                 name=row.get("name"),
+#                 description=row.get("description"),
+#                 start_date=row.get("start_date"),
+#                 end_date=row.get("end_date"),
+#                 address=row.get("address"),
+#                 price=row.get("price"),
+#                 customer_id=row.get("customer_id"),
+#                 executor_id=row.get("executor_id")
+#             )
+#         )
+#
+#     db.session.commit()
+#
+#
+# def insert_data_offer(input_data: list):
+#     """Вставляет данные в Offer построчно"""
+#     for row in input_data:
+#         db.session.add(
+#             Offer(
+#                 id=row.get("id"),
+#                 order_id=row.get("order_id"),
+#                 executor_id=row.get("executor_id")
+#             )
+#         )
+#
+#     db.session.commit()
 
-    db.session.commit()
 
-
-def insert_data_order(input_data: list):
-    """Вставляет данные в Order построчно"""
-    for row in input_data:
-        db.session.add(
-            Order(
-                id=row.get("id"),
-                name=row.get("name"),
-                description=row.get("description"),
-                start_date=row.get("start_date"),
-                end_date=row.get("end_date"),
-                address=row.get("address"),
-                price=row.get("price"),
-                customer_id=row.get("customer_id"),
-                executor_id=row.get("executor_id")
-            )
-        )
-
-    db.session.commit()
-
-
-def insert_data_offer(input_data: list):
-    """Вставляет данные в Offer построчно"""
-    for row in input_data:
-        db.session.add(
-            Offer(
-                id=row.get("id"),
-                order_id=row.get("order_id"),
-                executor_id=row.get("executor_id")
-            )
-        )
-
-    db.session.commit()
-
-
-def insert_data_universal(model, input_data: list):     #на вход подается модель и входные данные лист
+def insert_data_universal(model, input_data: list):  # на вход подается модель и входные данные:list
     """Вставляет данные в (model: User, Order, Offer) построчно. Универсальный вариант."""
-    for row in input_data:  #итерируемся по каждой строчке
-        db.session.add(model(**row))    #добавляем данные с распаковкой (ключ-значение)
+    for row in input_data:  # итерируемся по каждой строчке
+        db.session.add(model(**row))  # добавляем данные с распаковкой (ключ-значение)
     db.session.commit()
+
 
 def init_db():
     """При старте приложения положит наши данные в таблицы"""
@@ -67,15 +69,15 @@ def init_db():
     db.create_all()
     with open("data/user.json") as file:
         data = json.load(file)
-        insert_data_user(data)
+        insert_data_universal(User, data)
 
     with open("data/order.json") as file:
         data = json.load(file)
-        insert_data_order(data)
+        insert_data_universal(Order, data)
 
     with open("data/offer.json") as file:
         data = json.load(file)
-        insert_data_offer(data)
+        insert_data_universal(Offer, data)
 
 
 def get_all(model) -> dict:
@@ -113,5 +115,4 @@ def delete_universal(model, user_id):
         db.session.commit()
     except Exception as e:
         print(e)
-        return{}
-
+        return {}
