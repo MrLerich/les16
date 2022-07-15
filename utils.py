@@ -93,8 +93,9 @@ def get_all_by_id(model, user_id):
     """Возвращает данные по id (model: User, Order, Offer)"""
     try:
         return db.session.query(model).get(user_id).to_dict()
-    except Exception:
-        return {}
+    except Exception as e:
+        print(e)
+        return f"Данных по идентификатору {user_id} не найдено"
 
 
 def update_universal(model, user_id, values: dict):
@@ -105,7 +106,7 @@ def update_universal(model, user_id, values: dict):
         db.session.commit()
     except Exception as e:
         print(e)
-        return {}
+        return "Что-то пошло не так"
 
 
 def delete_universal(model, user_id):
@@ -115,4 +116,4 @@ def delete_universal(model, user_id):
         db.session.commit()
     except Exception as e:
         print(e)
-        return {}
+        return "Что-то пошло не так, данные не удалены"
