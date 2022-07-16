@@ -95,7 +95,7 @@ def get_all_by_id(model, user_id):
         return db.session.query(model).get(user_id).to_dict()
     except Exception as e:
         print(e)
-        return f"Данных по идентификатору {user_id} не найдено"
+        return f"Данных по идентификатору {user_id}  в таблице {model} не найдено"
 
 
 def update_universal(model, user_id, values: dict):
