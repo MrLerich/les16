@@ -67,15 +67,15 @@ def init_db():
     """При старте приложения положит наши данные в таблицы"""
     db.drop_all()
     db.create_all()
-    with open("data/user.json") as file:
+    with open("data/user.json", encoding='utf-8') as file:
         data = json.load(file)
         insert_data_universal(User, data)
 
-    with open("data/order.json") as file:
+    with open("data/order.json", encoding='utf-8') as file:
         data = json.load(file)
         insert_data_universal(Order, data)
 
-    with open("data/offer.json") as file:
+    with open("data/offer.json", encoding='utf-8') as file:
         data = json.load(file)
         insert_data_universal(Offer, data)
 
